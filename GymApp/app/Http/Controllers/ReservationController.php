@@ -13,7 +13,8 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $reservations = auth()->user()->reservations()->get();
+        return view('reservations.index', ['reservations' => $reservations]);
     }
 
     /**
@@ -21,7 +22,7 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //
+        return view('reservations.create');
     }
 
     /**
@@ -37,7 +38,7 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        //
+        return view('reservations.show', ['reservation' => $reservation]);
     }
 
     /**
@@ -45,7 +46,7 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        //
+        return view('reservations.edit', ['reservation' => $reservation]);
     }
 
     /**
@@ -61,6 +62,7 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        $reservation->delete();
+        return redirect()->route('reservations.index')->with('success', 'Reservation deleted successfully');
     }
 }

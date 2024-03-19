@@ -13,7 +13,8 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        //
+        $activities = auth()->user()->activities()->get();
+        return view('activities.index', ['activities' => $activities]);
     }
 
     /**
@@ -21,7 +22,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        return view('activities.create');
     }
 
     /**
@@ -37,7 +38,7 @@ class ActivityController extends Controller
      */
     public function show(Activity $activity)
     {
-        //
+        return view('activities.show', ['activity' => $activity]);
     }
 
     /**
@@ -45,7 +46,7 @@ class ActivityController extends Controller
      */
     public function edit(Activity $activity)
     {
-        //
+        return view('activities.edit', ['activity' => $activity]);
     }
 
     /**
@@ -61,6 +62,7 @@ class ActivityController extends Controller
      */
     public function destroy(Activity $activity)
     {
-        //
+        $activity->delete();
+        return redirect()->route('activities.index')->with('success', 'Activity deleted successfully');
     }
 }
