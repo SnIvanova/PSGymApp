@@ -64,7 +64,7 @@ class PrenotazioniController extends Controller
      */
     public function update(UpdatePrenotazioniRequest $request, Prenotazioni $prenotazioni)
     {
-        // questa funzione è da rivedere.....
+        $this->authorize('update', $prenotazioni);
         $prenotazioni->update(['isPending' => $request->input('isPending')]);
         return redirect()->back()->with('success', 'Prenotazione confermata con successo.');
     }
@@ -74,7 +74,7 @@ class PrenotazioniController extends Controller
      */
     public function destroy(Prenotazioni $prenotazioni)
     {
-        // funzione va
+        /* $this->authorize('delete', $prenotazioni); */
         $prenotazioni->delete();
         return redirect()->back()->with('success', 'Prenotazione eliminata con successo.');
     }

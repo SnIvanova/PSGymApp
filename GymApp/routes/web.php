@@ -33,4 +33,4 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::resource('/corsi', CorsiController::class);
-Route::resource('/prenotazioni', PrenotazioniController::class);
+Route::resource('/prenotazioni', PrenotazioniController::class)->middleware('auth');
