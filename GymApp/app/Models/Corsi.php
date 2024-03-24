@@ -18,4 +18,9 @@ class Corsi extends Model
     public function prenotazioni(): HasMany {
         return $this->HasMany(Prenotazioni::class, 'prenotazionis_id');
     }
+    protected $casts = [
+        'orario_inizio' => 'datetime',
+        'orario_fine' => 'datetime',
+        
+    ];
 }
