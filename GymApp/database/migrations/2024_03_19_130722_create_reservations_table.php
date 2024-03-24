@@ -18,7 +18,7 @@ return new class extends Migration
             $table->dateTime('reserved_at');
             $table->timestamps();
 
-            // Define foreign key constraints for user_id and activity_id columns
+            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade')->onUpdate('cascade');
         });
