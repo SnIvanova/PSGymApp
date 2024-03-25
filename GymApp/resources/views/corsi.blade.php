@@ -41,8 +41,9 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-outline-danger my-2 w-100" onclick="return confirm('Are you sure you want to delete this course?')">Delete</button>
                                                 </form>
+                                                @else
+                                                <a type="button" class="btn btn-outline-success my-2 w-100" href="/corsi/{{$corso->id}}">Subscribe</a>
                                             @endif
-                                            <a type="button" class="btn btn-outline-success my-2 w-100" href="/corsi/{{$corso->id}}">Subscribe</a>
                                             </td>
                                         </tr>
                                     @endforeach
