@@ -4,7 +4,17 @@
             {{ __('Courses') }}
         </h2>
     </x-slot>
+    @if(session('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+    @endif
 
+    @if(session('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -42,7 +52,11 @@
                                                     <button type="submit" class="btn btn-outline-danger my-2 w-100" onclick="return confirm('Are you sure you want to delete this course?')">Delete</button>
                                                 </form>
                                                 @else
-                                                <a type="button" class="btn btn-outline-success my-2 w-100" href="/corsi/{{$corso->id}}">Subscribe</a>
+                                                <form method="POST" action="{{ route('course.subscribe') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="course_id" value="{{ $corso->id }}">
+                                                    <button type="submit" class="btn btn-primary ">Subscribe</button>
+                                                </form>
                                             @endif
                                             </td>
                                         </tr>

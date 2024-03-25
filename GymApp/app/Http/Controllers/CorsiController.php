@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Corsi;
 use App\Http\Requests\StoreCorsiRequest;
 use App\Http\Requests\UpdateCorsiRequest;
+use Illuminate\Http\Request;
 
 class CorsiController extends Controller
 {
@@ -23,6 +24,8 @@ class CorsiController extends Controller
         }
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      */
@@ -36,7 +39,7 @@ class CorsiController extends Controller
      */
     public function store(StoreCorsiRequest $request)
     {
-        //
+     
     }
 
     /**
@@ -73,4 +76,28 @@ class CorsiController extends Controller
     
         return redirect()->back()->with('success', 'Course deleted successfully.');
     }
+
+    public function subscribe(Request $request)
+    {
+        $userId = auth()->id(); 
+        $courseId = $request->input('course_id'); 
+
+        
+        $existingSubscription = \App\Models\Prenotazioni::where('users_id', $userId)
+                                ->where('corsis_id', $courseId)
+                                ->first();
+
+        if ($existingSubscription) {
+            return back()->with('error', 'You are already subscribed to this course.');
+        }
+
+        
+        $subscription = new \App\Models\Prenotazioni;
+        $subscription->users_id = $userId;
+        $subscription->corsis_id = $courseId;
+        $subscription->save();
+
+        return redirect()->route('prenotazioni.index')->with('success', 'Subscription successful.');
+    }
+
 }

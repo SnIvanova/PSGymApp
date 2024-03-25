@@ -34,3 +34,4 @@ require __DIR__.'/auth.php';
 
 Route::resource('/corsi', CorsiController::class);
 Route::resource('/prenotazioni', PrenotazioniController::class)->middleware('auth');
+Route::post('/subscribe', [CorsiController::class, 'subscribe'])->name('course.subscribe');
