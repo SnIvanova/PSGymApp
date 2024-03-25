@@ -66,8 +66,11 @@ class CorsiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Corsi $corsi)
+    public function destroy($id)
     {
-        //
+        $corso = Corsi::findOrFail($id); 
+        $corso->delete();
+    
+        return redirect()->back()->with('success', 'Course deleted successfully.');
     }
 }
